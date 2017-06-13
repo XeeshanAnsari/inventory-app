@@ -9,11 +9,33 @@ module.exports = {
             .catch(next)
 
     },
-    getStores(req, res ,next){
-        
+
+
+    getStores(req, res, next) {
         Store.find({})
-        .then(stores => res.send(stores))
-        .catch(next)
-    }
+            .then(stores => res.send(stores))
+            .catch(next)
+    },
+
+
+    deleteStore(req, res, next) {
+        const storeId = req.params.id;
+      
+        Store.findByIdAndRemove({ _id: storeId})
+            .then(store => res.status(204).send(store))
+            .catch(next)
+
+    },
+    editStore(req, res, next) {
+        const storeId = req.params.id;
+        const storeProps = req.body;
+        
+        Store.findByIdAndUpdate({ _id: storeId} , storeProps)
+            .then(store => res.send(store))
+            .catch(next)
+
+    },
+
+
 
 }

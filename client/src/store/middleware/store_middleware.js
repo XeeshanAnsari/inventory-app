@@ -35,4 +35,32 @@ export default class StoreMiddleware {
         }
 
     }
+     static deleteStore(storeId) {
+        return (dispatch) => {
+            axios.delete(`${rooturl}/api/store/${storeId}`)
+                .then((response) => {
+                    if (response.status === 204) {
+                        dispatch(storeActions.deleteStore())
+                        dispatch(StoreMiddleware.getStores())
+
+                    }
+                })
+                .catch(err => dispatch(storeActions.deleteStoreWithRejected(err)))
+        }
+
+    }
+    static editStore(storeId , store) {
+        return (dispatch) => {
+            axios.put(`${rooturl}/api/store/${storeId}`, store)
+                .then((response) => {
+                 
+                        dispatch(storeActions.editStore(response.data))
+                        dispatch(StoreMiddleware.getStores())
+
+                    
+                })
+                .catch(err => dispatch(storeActions.editStoreWithRejected(err)))
+        }
+
+    }
 }

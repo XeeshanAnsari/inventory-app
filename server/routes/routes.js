@@ -13,4 +13,7 @@ module.exports = (app) => {
 
     app.post('/api/store' , StoreController.createStore)
     app.get('/api/store' , StoreController.getStores)
+    app.delete('/api/store/:id' , StoreController.deleteStore)
+    app.put('/api/store/:id' , StoreController.editStore)
+
 }
