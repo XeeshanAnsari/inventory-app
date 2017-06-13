@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
-import { Home, SignUp, SignIn  , AddStore , AllStores} from './containers'
+import { Home, SignUp, SignIn  , AddStore , AllStores , AddProduct} from './containers'
 
 
 class App extends Component {
@@ -13,6 +13,7 @@ class App extends Component {
                         <Route path="/signin" component={SignIn} />
                         <Route path="/addStore" component={AddStore} />
                         <Route path="/AllStores" component={AllStores} />
+                         <Route path="/AddProduct" component={AddProduct} />
                         
                     </Route>
                 </Router>

@@ -27,6 +27,7 @@ export default class storeActions {
             type: storeActions.CREATE_STORE_REJECTED,
             error
         }
+        
     }
 
 
