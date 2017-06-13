@@ -6,4 +6,4 @@
   `npm install`  
   `node index.js in Server folder` 
   `npm start in in clint folder`
-  
+  # inventory-app
