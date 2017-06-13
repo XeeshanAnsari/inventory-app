@@ -1,0 +1,21 @@
+{
+  "name": "todos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV=test nodemon --exec mocha --recursive -R min",
+    "dev": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mocha": "^3.4.1",
+    "mongoose": "^4.10.0",
+    "nodemon": "^1.11.0",
+    "supertest": "^3.0.0"
+  }
+}
