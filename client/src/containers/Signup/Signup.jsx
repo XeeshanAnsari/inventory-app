@@ -35,7 +35,6 @@ class SignUp extends Component {
     render() {
         return (
             <div>
-
                 <div className="signup-container">
                     <Paper className="signup-paper" >
                         <h1>Sign Up</h1>
