@@ -1,9 +1,12 @@
 .container{
     width: 95%;
 }
-.dialog-btn{
+.btn{
     margin: 10px 10px;
 
+}
+.group-btn{
+    text-align: center
 }
 .dialog{
     width: 50%;

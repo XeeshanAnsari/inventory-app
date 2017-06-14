@@ -1,6 +1,7 @@
 const UserController = require('../controllers/user_controller');
 const StoreController = require('../controllers/Store_controller');
 const ProductController = require('../controllers/product_controller');
+const SaleProductController = require('../controllers/sale_product_controller');
 const passportService = require('../service/passport')
 const passport = require('passport')
 
@@ -23,5 +24,7 @@ module.exports = (app) => {
     app.delete('/api/product/:id', ProductController.deleteProduct)
     app.put('/api/product/:id', ProductController.editProduct)
 
+    app.post('/api/saleProduct', SaleProductController.addSaleProduct)
+    app.get('/api/saleProduct/:id', SaleProductController.getSales)
 
 }

@@ -5,6 +5,9 @@ import AppBar from 'material-ui/AppBar'
 import DatePicker from 'material-ui/DatePicker'
 import Dialog from 'material-ui/Dialog'
 import RaisedButton from 'material-ui/RaisedButton'
+import { Tabs, Tab } from 'material-ui/Tabs';
+import FontIcon from 'material-ui/FontIcon';
+import MapsPersonPin from 'material-ui/svg-icons/maps/person-pin'
 import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table'
 import ProductMiddleware from './../../store/middleware/product_middleware'
 import { connect } from 'react-redux';
@@ -37,6 +40,9 @@ class AllProducts extends Component {
         this.handleEditproduct = this.handleEditproduct.bind(this)
         this.handleCloseDialog = this.handleCloseDialog.bind(this)
         this.handleAddProduct = this.handleAddProduct.bind(this)
+        this.handleSaleProduct = this.handleSaleProduct.bind(this)
+        this.handleSalesReport = this.handleSalesReport.bind(this)
+
 
     }
 
@@ -53,7 +59,17 @@ class AllProducts extends Component {
     handleAddProduct() {
         let storeId = this.props.params.id;
         console.log(storeId)
-        this.context.router.push(`/addProduct/${storeId}`)
+        this.context.router.push(`/store/${storeId}/addProduct`)
+    }
+    handleSaleProduct() {
+        let storeId = this.props.params.id;
+        console.log(storeId)
+        this.context.router.push(`/store/${storeId}/saleProduct`)
+    }
+    handleSalesReport() {
+        let storeId = this.props.params.id;
+        console.log(storeId)
+        this.context.router.push(`/store/${storeId}/saleReport`)
     }
 
     handleDeleteproduct() {
@@ -68,7 +84,7 @@ class AllProducts extends Component {
             productId: product._id
         })
     }
-    
+
 
     handleEditproduct(e) {
 
@@ -99,12 +115,46 @@ class AllProducts extends Component {
     render() {
         return (
             <div className='container'>
-                <RaisedButton
-                    onTouchTap={this.handleAddProduct}
-                    style={{ marginBottom: 20 }}
-                    label="Add Products"
-                    primary={true} />
-                <AppBar title="AVAILIABLE Product" />
+
+                {/*<Tabs>
+                    <Tab
+                        icon={<MapsPersonPin />}
+                        label="ADD PRODUCTS"
+                       
+                    />
+                    <Tab
+                        icon={<MapsPersonPin />}
+                        label="SALE PRODUCT"
+                    />
+                    <Tab
+                        icon={<MapsPersonPin />}
+                        label="SALES REPORT"
+                    />
+                </Tabs>*/}
+                <div className='group-btn'>
+                    <RaisedButton
+                        onTouchTap={this.handleAddProduct}
+                        className='btn'
+                        style={{ marginBottom: 20 }}
+                        label="Add Products"
+                        primary={true} />
+                    <RaisedButton
+                        className='btn'
+                        onTouchTap={this.handleSaleProduct}
+                        style={{ marginBottom: 20 }}
+                        label="Sale Product"
+                        primary={true} />
+                    <RaisedButton
+                        className='btn'
+                        onTouchTap={this.handleSalesReport}
+                        style={{ marginBottom: 20 }}
+                        label="Sales Report"
+                        primary={true} />
+                </div>
+
+
+
+                <AppBar title="AVAILIABLE Product" showMenuIconButton={false} />
                 <Table className="Table">
                     <TableHeader displayRowCheckbox={false} >
                         <TableRow  >
@@ -204,18 +254,18 @@ class AllProducts extends Component {
 
                         <div style={{ textAlign: 'center' }}>
                             <RaisedButton
-                                className='dialog-btn'
+                                className='btn'
                                 onTouchTap={this.handleCloseDialog}
                                 label="Cancel"
                                 primary={true} />
                             <RaisedButton
-                                className='dialog-btn'
+                                className='btn'
                                 secondary={true}
                                 label="Delete"
                                 onTouchTap={this.handleDeleteproduct} />
                             <RaisedButton
                                 onTouchTap={this.handleEditproduct}
-                                className='dialog-btn'
+                                className='btn'
                                 label="Save"
                                 primary={true} />
                         </div>

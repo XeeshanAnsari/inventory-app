@@ -5,6 +5,8 @@ import AddStore from './AddStore/AddStore'
 import AllStores from './AllStores/AllStores'
 import AddProduct from './AddProduct/AddProduct'
 import AllProducts from './AllProducts/AllProducts'
+import SaleProduct from './SaleProduct/SaleProduct'
+import AllSales from './AllSales/AllSales'
 
 
 export{
@@ -14,6 +16,8 @@ export{
     AddStore,
     AllStores,
     AddProduct,
-    AllProducts
-
+    AllProducts,
+    SaleProduct,
+    AllSales
+       
 }

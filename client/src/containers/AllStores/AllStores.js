@@ -48,7 +48,7 @@ class AllStores extends Component {
 
 
     handleOpenStore(store) {
-        this.context.router.push(`/allProducts/${store._id}`)
+        this.context.router.push(`/store/${store._id}`)
 
     }
     handleDeleteStore() {
@@ -79,7 +79,7 @@ class AllStores extends Component {
     render() {
         return (
             <div className='container'>
-                <AppBar title="AVAILIABLE STORES" />
+                <AppBar title="AVAILIABLE STORES" showMenuIconButton={false}/>
                 <Table className="Table">
                     <TableHeader displayRowCheckbox={false} >
                         <TableRow  >
