@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper'
+import DatePicker from 'material-ui/DatePicker'
 import RaisedButton from 'material-ui/RaisedButton'
 import ProductMiddleware from './../../store/middleware/product_middleware'
 import { connect } from 'react-redux';
@@ -20,23 +21,43 @@ const mapDispatchToProps = (dispatch) => {
 
 
 class AddProduct extends Component {
+
+    static contextTypes = {
+        router: React.PropTypes.object
+    }
     constructor(props) {
         super(props);
+        this.state = {
+            controlledDate: null
+        }
         this.handleAddProduct = this.handleAddProduct.bind(this);
     }
     handleAddProduct(e) {
         e.preventDefault();
+        console.log(this.props.params.id)
         let product = {
+            storeId: this.props.params.id,
             productName: this.refs.productName.getValue(),
             manufacturer: this.refs.manufacturer.getValue(),
             description: this.refs.description.getValue(),
             quantity: this.refs.quantity.getValue(),
-            date: this.refs.date.getValue(),
+            date: this.state.controlledDate,
             price: this.refs.price.getValue(),
+
         }
         console.log(product)
         this.props.AddProduct(product);
+        let storeId = this.props.params.id
+        this.context.router.push(`/allProducts/${storeId}`)
 
+    }
+    handleCloseDialog() {
+        this.setState({ openDialog: false })
+    }
+    handleDateChange = (event, date) => {
+        this.setState({
+            controlledDate: date,
+        })
     }
     render() {
         return (
@@ -73,14 +94,23 @@ class AddProduct extends Component {
                             type="number"
                             fullWidth={true}
                             required
-                        /><TextField
+                        />
+                        <DatePicker
+                            value={this.state.controlledDate}
+                            onChange={this.handleDateChange.bind(this)}
+                            floatingLabelText="Date"
+                            hintText="Date"
+                            fullWidth={true}
+                            required
+                        />
+                        {/*<TextField
                             ref="date"
                             floatingLabelText="Date"
                             hintText="Date"
-                            type="number"
                             fullWidth={true}
                             required
-                        /><TextField
+                        />*/}
+                        <TextField
                             ref="price"
                             type="number"
                             floatingLabelText="Price"

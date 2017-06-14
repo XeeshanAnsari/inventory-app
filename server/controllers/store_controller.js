@@ -1,4 +1,4 @@
-const Product = require('../models/product_model');
+const Store = require('../models/store_model');
 
 module.exports = {
 
@@ -20,8 +20,8 @@ module.exports = {
 
     deleteStore(req, res, next) {
         const storeId = req.params.id;
-      
-        Store.findByIdAndRemove({ _id: storeId})
+
+        Store.findByIdAndRemove({ _id: storeId })
             .then(store => res.status(204).send(store))
             .catch(next)
 
@@ -29,8 +29,8 @@ module.exports = {
     editStore(req, res, next) {
         const storeId = req.params.id;
         const storeProps = req.body;
-        
-        Store.findByIdAndUpdate({ _id: storeId} , storeProps)
+
+        Store.findByIdAndUpdate({ _id: storeId }, storeProps)
             .then(store => res.send(store))
             .catch(next)
 

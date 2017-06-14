@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 
 
 const productSchema = new Schema({
+    storeId: {
+        type: String,
+        unique: true
+    },
     productName: {
         type: String,
         required: true
@@ -20,7 +24,7 @@ const productSchema = new Schema({
         required: true
     },
     date: {
-        type: Number,
+        type: Date,
         required: true
     },
     price: {

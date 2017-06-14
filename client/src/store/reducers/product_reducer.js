@@ -1,35 +1,34 @@
-import storeActions from '../actions/store_action'
+import productActions from '../actions/product_action'
 
 const INITIAL_STATE = {
-
-    product: [],
+    products: [],
     error: "",
     isError: false
 };
 
 
-export default function StoreReducer(state = INITIAL_STATE, action) {
+export default function productReducer(state = INITIAL_STATE, action) {
     switch (action.type) {
 
 
-        case storeActions.CREATE_STORE:
-            return Object.assign({}, state, { stores: action.store, isError: false })
-        case storeActions.CREATE_STORE_REJECTED:
+        case productActions.CREATE_PRODUCT:
+            return Object.assign({}, state, { products: action.product, isError: false })
+        case productActions.CREATE_PRODUCT_REJECTED:
             return Object.assign({}, state, { error: action.error, isError: true })
 
-        case storeActions.GET_STORES:
-            return Object.assign({}, state, { stores: action.store, isError: false })
-        case storeActions.GETS_STORES_REJECTED:
+        case productActions.GET_PRODUCTS:
+            return Object.assign({}, state, { products: action.product, isError: false })
+        case productActions.GETS_PRODUCTS_REJECTED:
             return Object.assign({}, state, { error: action.error, isError: true })
 
-        case storeActions.DELETE_STORE:
+        case productActions.DELETE_PRODUCT:
             return Object.assign({}, state, { isError: false })
-        case storeActions.DELETE_STORE_REJECTED:
+        case productActions.DELETE_PRODUCT_REJECTED:
             return Object.assign({}, state, { error: action.error, isError: true })
 
-        case storeActions.EDIT_STORE:
+        case productActions.EDIT_PRODUCT:
             return Object.assign({}, state, { isError: false })
-        case storeActions.EDIT_STORE_REJECTED:
+        case productActions.EDIT_PRODUCT_REJECTED:
             return Object.assign({}, state, { error: action.error, isError: true })
 
 

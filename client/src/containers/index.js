@@ -4,6 +4,7 @@ import SignUp from './Signup/Signup'
 import AddStore from './AddStore/AddStore'
 import AllStores from './AllStores/AllStores'
 import AddProduct from './AddProduct/AddProduct'
+import AllProducts from './AllProducts/AllProducts'
 
 
 export{
@@ -12,5 +13,7 @@ export{
     SignIn,
     AddStore,
     AllStores,
-    AddProduct
+    AddProduct,
+    AllProducts
+
 }

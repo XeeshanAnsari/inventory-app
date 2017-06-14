@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Paper from 'material-ui/Paper'
 import TextField from 'material-ui/TextField';
 import AppBar from 'material-ui/AppBar'
@@ -25,6 +25,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
 class AllStores extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -33,7 +34,12 @@ class AllStores extends Component {
         this.handleDeleteStore = this.handleDeleteStore.bind(this)
         this.handleEditStore = this.handleEditStore.bind(this)
         this.handleCloseDialog = this.handleCloseDialog.bind(this)
+        this.handleOpenStore = this.handleOpenStore.bind(this)
 
+    }
+
+    static contextTypes = {
+        router: React.PropTypes.object
     }
 
     componentWillMount() {
@@ -41,6 +47,10 @@ class AllStores extends Component {
     }
 
 
+    handleOpenStore(store) {
+        this.context.router.push(`/allProducts/${store._id}`)
+
+    }
     handleDeleteStore() {
         let id = this.state.storeId;
         this.props.deleteStore(id);
@@ -76,8 +86,8 @@ class AllStores extends Component {
                             <TableHeaderColumn>ID</TableHeaderColumn>
                             <TableHeaderColumn >Store Name</TableHeaderColumn>
                             <TableHeaderColumn>Location</TableHeaderColumn>
-                            <TableHeaderColumn>Edit</TableHeaderColumn>
-                            <TableHeaderColumn>Delete</TableHeaderColumn>
+                            <TableHeaderColumn>Open</TableHeaderColumn>
+
 
                         </TableRow>
                     </TableHeader>
@@ -85,10 +95,16 @@ class AllStores extends Component {
                         {
                             this.props.storeList.map((store, i) => {
                                 return (
-                                    <TableRow key={store._id} onTouchTap={() => this.EditStore(store)}>
+                                    <TableRow key={store._id} >
                                         <TableRowColumn >{i + 1}</TableRowColumn>
                                         <TableRowColumn >{store.storeName}</TableRowColumn>
                                         <TableRowColumn >{store.location}</TableRowColumn>
+                                        <TableRowColumn >
+                                            <RaisedButton
+                                                onTouchTap={() => this.handleOpenStore(store)}
+                                                label="Open"
+                                                primary={true} />
+                                        </TableRowColumn>
                                     </TableRow>
                                 )
 

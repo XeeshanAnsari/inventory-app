@@ -2,7 +2,7 @@ const Product = require('../models/product_model');
 
 module.exports = {
 
-    AddProduct(req, res, next) {
+    addProduct(req, res, next) {
         const productProps = req.body;
         Product.create(productProps)
             .then(product => res.send(product))
@@ -12,25 +12,26 @@ module.exports = {
 
 
     getProducts(req, res, next) {
-        Product.find({})
+        const storeParamsId = req.params.id;
+        Product.find({ storeId: storeParamsId })
             .then(products => res.send(products))
             .catch(next)
     },
 
 
-    deleteproduct(req, res, next) {
+    deleteProduct(req, res, next) {
         const productId = req.params.id;
-      
-        Product.findByIdAndRemove({ _id: productId})
+
+        Product.findByIdAndRemove({ _id: productId })
             .then(product => res.status(204).send(product))
             .catch(next)
 
     },
-    editproduct(req, res, next) {
+    editProduct(req, res, next) {
         const productId = req.params.id;
         const productProps = req.body;
-        
-        Product.findByIdAndUpdate({ _id: productId} , productProps)
+
+        Product.findByIdAndUpdate({ _id: productId }, productProps)
             .then(product => res.send(product))
             .catch(next)
 

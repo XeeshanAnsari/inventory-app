@@ -5,7 +5,7 @@ const rooturl = "http://localhost:3090";
 
 export default class ProductMiddleware {
 
-  
+
     static addProduct(product) {
         return (dispatch) => {
             axios.post(`${rooturl}/api/product`, product)
@@ -19,31 +19,34 @@ export default class ProductMiddleware {
 
     }
 
-    static getProduct() {
+    static getProducts(id) {
         return (dispatch) => {
-            axios.get(`${rooturl}/api/store`)
+            console.log('sfsdf')
+            axios.get(`${rooturl}/api/product/${id}`)
                 .then((response) => {
                     if (response.status === 200) {
-                        let stores = [];
+                        let products = [];
                         let data = response.data;
-                        for(var store in data){
-                            stores.push(data[store])
+                        console.log(response.data)
+                        for (var product in data) {
+                            products.push(data[product])
                         }
                         console.log(response.data)
-                        dispatch(productActions.getProducts(stores))
+                        dispatch(productActions.getProducts(products))
                     }
                 })
                 .catch(err => dispatch(productActions.getproductsWithRejected(err)))
         }
 
     }
-     static deleteProduct(storeId) {
+    static deleteProduct(productId, storeId) {
         return (dispatch) => {
-            axios.delete(`${rooturl}/api/store/${storeId}`)
+            console.log(storeId)
+            axios.delete(`${rooturl}/api/product/${productId}`)
                 .then((response) => {
                     if (response.status === 204) {
                         dispatch(productActions.deleteProduct())
-                        dispatch(ProductMiddleware.getProduct())
+                        dispatch(ProductMiddleware.getProducts(storeId))
 
                     }
                 })
@@ -51,15 +54,16 @@ export default class ProductMiddleware {
         }
 
     }
-    static editProduct(storeId , store) {
+    static editProduct(productId, product, storeId) {
         return (dispatch) => {
-            axios.put(`${rooturl}/api/store/${storeId}`, store)
+            console.log(storeId)
+            axios.put(`${rooturl}/api/product/${productId}`, product)
                 .then((response) => {
-                 
-                        dispatch(productActions.editProduct(response.data))
-                        dispatch(ProductMiddleware.getProduct())
 
-                    
+                    dispatch(productActions.editProduct(response.data))
+                    dispatch(ProductMiddleware.getProducts(storeId))
+
+
                 })
                 .catch(err => dispatch(productActions.editProductWithRejected(err)))
         }

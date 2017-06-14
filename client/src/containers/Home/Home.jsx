@@ -30,15 +30,15 @@ class Home extends Component {
             <div>
                 <MenuItem
                     className="navigation-menuItem"
-                    primaryText="null"
-                    containerElement={<Link to="/" />}
+                    primaryText="Add Store"
+                    containerElement={<Link to="/addStore" />}
                 />
 
-                {/*<MenuItem
+                <MenuItem
                     className="navigation-menuItem"
-                    primaryText="View Jobs"
-                    containerElement={<Link to="/viewAlljobs" />}
-                />*/}
+                    primaryText="Availiable Stores"
+                    containerElement={<Link to="/allStores" />}
+                />
 
             </div>
         )

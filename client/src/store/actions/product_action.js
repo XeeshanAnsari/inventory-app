@@ -14,11 +14,11 @@ export default class productActions {
     static EDIT_PRODUCT = "EDIT_PRODUCT";
     static EDIT_PRODUCT_REJECTED = "EDIT_PRODUCT_REJECTED";
 
-    
-    static addProduct(PRODUCT) {
+
+    static addProduct(product) {
         return {
             type: productActions.CREATE_PRODUCT,
-            PRODUCT
+            product
         }
 
     }
@@ -27,11 +27,13 @@ export default class productActions {
             type: productActions.CREATE_PRODUCT_REJECTED,
             error
         }
-        }
-    
+    }
 
 
-    static getProducts(product){
+
+
+
+    static getProducts(product) {
         return {
             type: productActions.GET_PRODUCTS,
             product
@@ -44,7 +46,7 @@ export default class productActions {
         }
     }
 
-// for delete PRODU
+    // for delete PRODU
     static deleteProduct() {
         return {
             type: productActions.DELETE_PRODUCT
@@ -56,11 +58,11 @@ export default class productActions {
             error
         }
     }
-   // for edit PRODUCT 
+    // for edit PRODUCT 
     static editProduct() {
         return {
             type: productActions.EDIT_PRODUCT,
-            
+
         }
     }
     static editProductWithRejected(error) {

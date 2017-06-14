@@ -34,10 +34,10 @@ exports.signUp = (req, res, next) => {
         user.save(function (err) {
             if (err) { return next(err) }
             //repond to request indicating the user was created
-            res.json({ 
-                user:user,
+            res.json({
+                user: user,
                 token: tokenForUser(user)
-             })
+            })
 
         })
 
@@ -48,7 +48,7 @@ exports.signUp = (req, res, next) => {
 }
 //fro signIn 
 exports.signIn = (req, res, next) => {
-   
+
     const email = req.body.email;
     User.findOne({ email: email })
         .then((user) => {

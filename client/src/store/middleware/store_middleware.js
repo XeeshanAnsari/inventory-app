@@ -5,7 +5,9 @@ const rooturl = "http://localhost:3090";
 
 export default class StoreMiddleware {
     static createStore(store) {
+        
         return (dispatch) => {
+            console.log(store)
             axios.post(`${rooturl}/api/store`, store)
                 .then((response) => {
                     if (response.status === 200) {

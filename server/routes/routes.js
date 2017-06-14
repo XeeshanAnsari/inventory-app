@@ -12,12 +12,16 @@ module.exports = (app) => {
     app.post('/api/signup', UserController.signUp)
 
 
-    app.post('/api/store' , StoreController.createStore)
-    app.get('/api/store' , StoreController.getStores)
-    app.delete('/api/store/:id' , StoreController.deleteStore)
-    app.put('/api/store/:id' , StoreController.editStore)
+    app.post('/api/store', StoreController.createStore)
+    app.get('/api/store', StoreController.getStores)
+    app.delete('/api/store/:id', StoreController.deleteStore)
+    app.put('/api/store/:id', StoreController.editStore)
 
 
-    app.post('/api/product' , ProductController.AddProduct )
+    app.post('/api/product', ProductController.addProduct)
+    app.get('/api/product/:id', ProductController.getProducts)
+    app.delete('/api/product/:id', ProductController.deleteProduct)
+    app.put('/api/product/:id', ProductController.editProduct)
+
 
 }
