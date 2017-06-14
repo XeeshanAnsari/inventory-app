@@ -36,6 +36,23 @@ module.exports = {
             .catch(next)
 
     },
+    UpdateProductQuantity(req, res, next) {
+        const productId = req.params.id;
+        const cQuantity = req.body.cQuantity;
+
+
+        Product.findById({ _id: productId })
+            .then((product) => {
+                let pQuantity = product.quantity
+                Product.findOneAndUpdate({ pQuantity: cQuantity })
+                    .then(product => res.send(product))
+                    .catch(next)
+            })
+            .catch(next)
+
+       
+
+    }
 
 
 

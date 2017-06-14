@@ -6,6 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import SelectField from 'material-ui/SelectField'
 import MenuItem from 'material-ui/MenuItem'
 import saleProductMiddleware from './../../store/middleware/sale_product_middleware'
+import ProductMiddleware from './../../store/middleware/product_middleware'
 import { connect } from 'react-redux';
 import './SaleProduct.css'
 
@@ -17,6 +18,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        updateStoreData:(cQuantity ,productId ,storeId) => dispatch(ProductMiddleware.UpdateProductQuantity(cQuantity ,productId ,storeId)),
         addSaleProduct: (product) => dispatch(saleProductMiddleware.addSaleProduct(product))
     }
 };
@@ -34,17 +36,32 @@ class SaleProduct extends Component {
             productName: "",
             unitPrice: "",
             totalPrice: "",
-            errorText: ""
+            errorText: "",
+            currentProductDetails:null
         }
         this.handleSaleProduct = this.handleSaleProduct.bind(this)
-        // this.handleTotalPrice = this.handleTotalPrice.bind(this)
         this.handleCheckQuantity = this.handleCheckQuantity.bind(this)
+        this.handleUpdateStoreData = this.handleUpdateStoreData.bind(this)
 
     }
 
     handleDateChange(e, date) {
         this.setState({ controlledDate: date })
     }
+
+    handleUpdateStoreData() {
+        let cQuantity = this.refs.quantity.getValue()
+        let pQuantity = this.state.currentProductDetails.quantity;
+        let productId = this.state.currentProductDetails._id;
+        let storeId = this.props.params.id;
+
+        console.log("previous " + pQuantity )
+        console.log('id ' + productId)
+
+        this.props.updateStoreData(cQuantity, productId , storeId)
+
+    }
+
     handleSaleProduct(e) {
         e.preventDefault();
 
@@ -59,9 +76,12 @@ class SaleProduct extends Component {
         }
         console.log(saleProduct)
         this.props.addSaleProduct(saleProduct);
+
+        this.handleUpdateStoreData()
         // let storeId = this.props.params.id
         // this.context.router.push(`/store/${storeId}/allProducts`)
     }
+
     handleProductName(ev, index, value) {
         console.log(value)
         this.setState({ productName: value })
@@ -70,43 +90,49 @@ class SaleProduct extends Component {
                 if (product.productName === this.state.productName) {
 
                     this.setState({
+                        currentProductDetails: product,
                         unitPrice: product.price
                     })
                 }
             }))
         }, 1000)
-        // this.props.productList.filter((product => {
-        //     if (product.productName === this.state.productName) {
 
-        //         this.setState(() => {
-        //               return {
-        //                 unitPrice: product.productName
-        //               } 
-        //         })
-        //     }
-        // }))
     }
+
     handleCheckQuantity() {
+
+        // let quantity = this.refs.quantity.getValue()
+        // let currentProductDetails = this.state.currentProductDetails
+        // if (currentProductDetails.quantity > quantity) {
+        //     let unitPrice = currentProductDetails.unitPrice;
+        //     let totalPrice = quantity * unitPrice;
+        //     this.setState({
+        //         totalPrice: totalPrice,
+        //         errorText: ""
+        //     })
+        // }
+        // else {
+        //     this.setState({ errorText: 'NOT AVAILIABE' })
+        // }
+
         this.props.productList.filter((product => {
             if (product.productName === this.state.productName) {
                 let quantity = this.refs.quantity.getValue()
                 if (product.quantity > quantity) {
                     let unitPrice = this.state.unitPrice;
                     let totalPrice = quantity * unitPrice;
-                    this.setState({ totalPrice: totalPrice })
+                    this.setState({
+                        totalPrice: totalPrice,
+                        errorText: ""
+                    })
                 }
                 else {
-                    this.setState({errorText:'NOT AVAILIABE'})
+                    this.setState({ errorText: 'NOT AVAILIABE' })
                 }
             }
         }))
     }
-    // handleTotalPrice() {
-    //     let quantity = this.refs.quantity.getValue()
-    //     let unitPrice = this.state.unitPrice;
-    //     let totalPrice = quantity * unitPrice;
-    //     this.setState({ totalPrice: totalPrice })
-    // }
+
 
     render() {
         return (

@@ -59,7 +59,24 @@ export default class ProductMiddleware {
             console.log(storeId)
             axios.put(`${rooturl}/api/product/${productId}`, product)
                 .then((response) => {
+                    console.log(response.data)
+                    dispatch(productActions.editProduct(response.data))
+                    dispatch(ProductMiddleware.getProducts(storeId))
 
+
+                })
+                .catch(err => dispatch(productActions.editProductWithRejected(err)))
+        }
+
+    }
+
+    static UpdateProductQuantity(cQuantity , productId , storeId) {
+        return (dispatch) => {
+            console.log(productId)
+            axios.put(`${rooturl}/api/product/${productId}`,{cQuantity})
+                .then((response) => {
+                     console.log(response.data);
+                     console.log(cQuantity)
                     dispatch(productActions.editProduct(response.data))
                     dispatch(ProductMiddleware.getProducts(storeId))
 

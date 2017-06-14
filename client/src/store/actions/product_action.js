@@ -59,10 +59,10 @@ export default class productActions {
         }
     }
     // for edit PRODUCT 
-    static editProduct() {
+    static editProduct(product) {
         return {
             type: productActions.EDIT_PRODUCT,
-
+            product
         }
     }
     static editProductWithRejected(error) {
@@ -71,4 +71,5 @@ export default class productActions {
             error
         }
     }
+
 }
