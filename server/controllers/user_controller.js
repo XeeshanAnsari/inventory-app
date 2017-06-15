@@ -1,7 +1,9 @@
 
 const User = require('../models/user_model')
+const Store = require('../models/store_model');
 const jwt = require('jwt-simple');
 const config = require('../config')
+
 //jwt function for userToken
 function tokenForUser(user) {
     const timeStamp = new Date().getTime();
@@ -10,7 +12,8 @@ function tokenForUser(user) {
 
 
 exports.signUp = (req, res, next) => {
-    const fullName = req.body.fullName;
+    const distribution = req.body.distribution;
+    const storeId = req.body.storeId;
     const email = req.body.email;
     const password = req.body.password;
 
@@ -27,19 +30,27 @@ exports.signUp = (req, res, next) => {
         }
         //if email does not exist , create new user
         const user = new User({
-            fullName: fullName,
+            distribution: distribution,
+            storeId: storeId,
             email: email,
             password: password
         })
-        user.save(function (err) {
-            if (err) { return next(err) }
-            //repond to request indicating the user was created
-            res.json({
-                user: user,
-                token: tokenForUser(user)
-            })
+        Store.findById({ _id: storeId })
+            .then((store) => {
+                if (store) {
+                    user.save(function (err) {
+                        if (err) { return next(err) }
+                        //repond to request indicating the user was created
+                        res.json({
+                            user: user,
+                            token: tokenForUser(user)
+                        })
 
-        })
+                    })
+                }
+
+            })
+            .catch(next)
 
     })
 
@@ -49,8 +60,8 @@ exports.signUp = (req, res, next) => {
 //fro signIn 
 exports.signIn = (req, res, next) => {
 
-    const email = req.body.email;
-    User.findOne({ email: email })
+    const id = req.body.id;
+    User.findOne({ storeId: id })
         .then((user) => {
             res.send({
                 user: user,

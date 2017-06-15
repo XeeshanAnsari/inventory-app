@@ -23,7 +23,8 @@ class SignUp extends Component {
     handleSignUp(e) {
         e.preventDefault();
         const newUser = {
-            fullName: this.refs.fullName.getValue(),
+            distribution: this.refs.distribution.getValue(),
+            storeId: this.refs.storeId.getValue(),
             email: this.refs.email.getValue(),
             password: this.refs.pass.getValue(),
         }
@@ -40,9 +41,16 @@ class SignUp extends Component {
                         <h1>Sign Up</h1>
                         <form onSubmit={this.handleSignUp}>
                             <TextField
-                                ref="fullName"
-                                floatingLabelText="Full Name"
-                                hintText="Full Name"
+                                ref="distribution"
+                                floatingLabelText="Distribution Name"
+                                hintText="Distribution Name"
+                                fullWidth={true}
+                                required
+                            />
+                            <TextField
+                                ref="storeId"
+                                floatingLabelText="Store Id"
+                                hintText="Store Id"
                                 fullWidth={true}
                                 required
                             />

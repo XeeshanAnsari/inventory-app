@@ -16,7 +16,8 @@ import './AllProducts.css'
 
 const mapStateToProps = (state) => {
     return {
-        productList: state.ProductReducer.products
+        productList: state.ProductReducer.products,
+        isAdmin: state.AuthReducer.isAdmin
     };
 }
 const mapDispatchToProps = (dispatch) => {
@@ -131,26 +132,30 @@ class AllProducts extends Component {
                         label="SALES REPORT"
                     />
                 </Tabs>*/}
-                <div className='group-btn'>
-                    <RaisedButton
-                        onTouchTap={this.handleAddProduct}
-                        className='btn'
-                        style={{ marginBottom: 20 }}
-                        label="Add Products"
-                        primary={true} />
-                    <RaisedButton
-                        className='btn'
-                        onTouchTap={this.handleSaleProduct}
-                        style={{ marginBottom: 20 }}
-                        label="Sale Product"
-                        primary={true} />
-                    <RaisedButton
-                        className='btn'
-                        onTouchTap={this.handleSalesReport}
-                        style={{ marginBottom: 20 }}
-                        label="Sales Report"
-                        primary={true} />
-                </div>
+                {(this.props.isAdmin)
+                    ?
+                    <div className='group-btn'>
+                        <RaisedButton
+                            onTouchTap={this.handleAddProduct}
+                            className='btn'
+                            style={{ marginBottom: 20 }}
+                            label="Add Products"
+                            primary={true} />
+                        <RaisedButton
+                            className='btn'
+                            onTouchTap={this.handleSaleProduct}
+                            style={{ marginBottom: 20 }}
+                            label="Sale Product"
+                            primary={true} />
+                        <RaisedButton
+                            className='btn'
+                            onTouchTap={this.handleSalesReport}
+                            style={{ marginBottom: 20 }}
+                            label="Sales Report"
+                            primary={true} />
+                    </div>
+                    : null
+                }
 
 
 

@@ -48,7 +48,7 @@ class AllStores extends Component {
 
 
     handleOpenStore(store) {
-        this.context.router.push(`/store/${store._id}`)
+        this.context.router.push(`/store/${store._id}/viewProduct`)
 
     }
     handleDeleteStore() {

@@ -48,7 +48,7 @@ class AddProduct extends Component {
         console.log(product)
         this.props.AddProduct(product);
         let storeId = this.props.params.id
-        this.context.router.push(`/store/${storeId}`)
+        // this.context.router.push(`/store/${storeId}`)
 
     }
     handleCloseDialog() {

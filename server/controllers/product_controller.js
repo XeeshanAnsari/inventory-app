@@ -38,19 +38,26 @@ module.exports = {
     },
     UpdateProductQuantity(req, res, next) {
         const productId = req.params.id;
-        const cQuantity = req.body.cQuantity;
+        const productProps = req.body;
+        
 
 
-        Product.findById({ _id: productId })
-            .then((product) => {
-                let pQuantity = product.quantity
-                Product.findOneAndUpdate({ pQuantity: cQuantity })
-                    .then(product => res.send(product))
-                    .catch(next)
-            })
+
+        Product.findByIdAndUpdate({ _id: productId }, productProps)
+            .then(product => res.send(product))
             .catch(next)
+        // Product.findById({ _id: productId })
+        //     .then((product) => {
+        //         let pQuantity = product.quantity;
+        //         console.log(pQuantity)
+        //         product.findOneAndUpdate({ quantity: pQuantity }, cQuantity)
+        //             .then(cProduct => res.send(cProduct))
 
-       
+        //             .catch(next)
+        //     })
+        //     .catch(next)
+
+
 
     }
 

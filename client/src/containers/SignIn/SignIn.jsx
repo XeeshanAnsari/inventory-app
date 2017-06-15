@@ -17,8 +17,8 @@ class SignIn extends Component {
     constructor() {
         super()
         this.state = {
-            email: '',
-            pass: '',
+            id: '',
+            password: '',
         }
         this.handleSignIn = this.handleSignIn.bind(this)
 
@@ -44,19 +44,19 @@ class SignIn extends Component {
                         <h1>Log In</h1>
                         <form onSubmit={this.handleSignIn}>
                             <TextField
-                                value={this.state.email}
-                                floatingLabelText="Email"
-                                hintText="Email"
+                                value={this.state.id}
+                                floatingLabelText="ID"
+                                hintText="ID"
                                 fullWidth={true}
-                                onChange={e => this.setState({ email: e.target.value })}
+                                onChange={e => this.setState({ id: e.target.value })}
                             />
                             <TextField
-                                value={this.state.pass}
+                                value={this.state.password}
                                 floatingLabelText="Password"
                                 hintText="Password"
                                 fullWidth={true}
                                 type="password"
-                                onChange={e => this.setState({ pass: e.target.value })}
+                                onChange={e => this.setState({ password: e.target.value })}
                             />
 
                             <RaisedButton

@@ -39,7 +39,7 @@ class Buttons extends Component {
                       
                         <div>
                             <Link to="/signin" className='buttons'><RaisedButton type="submit" primary={true} >Sign In</RaisedButton></Link>
-                            <Link to="/signup" className='buttons'><RaisedButton type="submit" primary={true} >Sign Up</RaisedButton></Link>
+                            {/*<Link to="/signup" className='buttons'><RaisedButton type="submit" primary={true} >Sign Up</RaisedButton></Link>*/}
                         </div>
                         :
                         <div>

@@ -18,7 +18,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        updateStoreData:(cQuantity ,productId ,storeId) => dispatch(ProductMiddleware.UpdateProductQuantity(cQuantity ,productId ,storeId)),
+        updateStoreData: (updatedProduct, productId, storeId) => dispatch(ProductMiddleware.UpdateProductQuantity(updatedProduct, productId, storeId)),
         addSaleProduct: (product) => dispatch(saleProductMiddleware.addSaleProduct(product))
     }
 };
@@ -37,7 +37,7 @@ class SaleProduct extends Component {
             unitPrice: "",
             totalPrice: "",
             errorText: "",
-            currentProductDetails:null
+            currentProductDetails: null
         }
         this.handleSaleProduct = this.handleSaleProduct.bind(this)
         this.handleCheckQuantity = this.handleCheckQuantity.bind(this)
@@ -51,14 +51,27 @@ class SaleProduct extends Component {
 
     handleUpdateStoreData() {
         let cQuantity = this.refs.quantity.getValue()
-        let pQuantity = this.state.currentProductDetails.quantity;
+        let currentProductDetails = this.state.currentProductDetails;
+        let pQuantity = currentProductDetails.quantity;
+        console.log("previous " + currentProductDetails.quantity)
+        let currentQuantity = pQuantity - cQuantity;
+
+        let updatedProduct = {
+            ...currentProductDetails,
+            quantity: currentQuantity
+        }
+        console.log("new " + updatedProduct.quantity)
+
+
         let productId = this.state.currentProductDetails._id;
         let storeId = this.props.params.id;
 
-        console.log("previous " + pQuantity )
+
+        console.log('userQuantity' + cQuantity)
+        console.log('curQuantity' + currentQuantity)
         console.log('id ' + productId)
 
-        this.props.updateStoreData(cQuantity, productId , storeId)
+        this.props.updateStoreData(updatedProduct, productId, storeId)
 
     }
 

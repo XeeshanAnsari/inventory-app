@@ -9,12 +9,12 @@ const LocalStrategy = require('passport-local')
 
 //create local Strategy
 
-const localOptions = { usernameField: 'email' }
-const localLogin = new LocalStrategy(localOptions, function (email, password, done) {
+const localOptions = { usernameField: 'storeId' }
+const localLogin = new LocalStrategy(localOptions, function (id, password, done) {
     //verify this email and password , call done with the user
     //if it is correct email and pass so done
 
-    User.findOne({ email: email }, function (err, user) {
+    User.findOne({ storeId: id }, function (err, user) {
         if (err) { return done(err) }
         if (!err) { return done(null, false) }
 

@@ -29,11 +29,18 @@ export default class AuthMiddelware {
 
             axios.post(`${rooturl}/api/signin`, user)
                 .then((response) => {
-                    
+                    let storeId = response.data.user.storeId;
+                    console.log(response.data.user.storeId)
+                    if (storeId === "admin123") {
+                          dispatch(authActions.SignInAsAdmin())
+                          browserHistory.push('/')
+                    } else {
                         sessionStorage.setItem('token', response.data.token);
-                        dispatch(authActions.SignInWithSuccessFul(response.data))
+                        dispatch(authActions.SignInWithSuccessFul(response.data, storeId))
                         browserHistory.push('/')
-                    
+                    }
+
+
                 })
                 .catch((error) => {
                     dispatch(authActions.SignInWithRejected(error))

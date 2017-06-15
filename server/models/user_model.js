@@ -5,10 +5,15 @@ const bcrypt = require('bcrypt-nodejs')
 
 const UserSchema = new Schema({
 
-    fullName: {
+    distribution: {
         type: String,
         required: true
     },
+    storeId: {
+        type: String,
+        required: true
+    },
+    
     email: {
         type: String,
         required: true
@@ -37,10 +42,10 @@ UserSchema.pre('save', function (next) {
 })
 
 // decrypt your password
-UserSchema.methods.comparePassword = function(candidatePasseord , callback){
-    bcrypt.comparePassword(candidatePasseord , this.password , function(err , isMatch){
-        if(err) { return callback(err); }
-        callback(null , isMatch)
+UserSchema.methods.comparePassword = function (candidatePasseord, callback) {
+    bcrypt.comparePassword(candidatePasseord, this.password, function (err, isMatch) {
+        if (err) { return callback(err); }
+        callback(null, isMatch)
     })
 }
 

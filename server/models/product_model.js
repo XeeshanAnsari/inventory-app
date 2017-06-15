@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 
 const productSchema = new Schema({
+    
     storeId: {
         type: String,
         unique: true
