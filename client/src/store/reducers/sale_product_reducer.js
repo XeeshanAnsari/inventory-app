@@ -2,6 +2,7 @@ import saleProductActions from '../actions/sale_product_action'
 
 const INITIAL_STATE = {
     sales: [],
+    singleSale:[],
     error: "",
     isError: false
 };
@@ -12,7 +13,7 @@ export default function saleProductReducer(state = INITIAL_STATE, action) {
 
 
         case saleProductActions.CREATE_SALE_PRODUCT:
-            return Object.assign({}, state, { sales: action.product, isError: false })
+            return Object.assign({}, state, { singleSale: action.product, isError: false })
         case saleProductActions.CREATE_SALE_PRODUCT_REJECTED:
             return Object.assign({}, state, { error: action.error, isError: true })
 

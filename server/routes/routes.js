@@ -9,7 +9,7 @@ const requireSignIn = passport.authenticate('local', { session: false })
 
 module.exports = (app) => {
 
-    app.post('/api/signin', UserController.signIn)
+    app.post('/api/signin',  UserController.signIn)
     app.post('/api/signup',  UserController.signUp)
 
 
@@ -24,6 +24,7 @@ module.exports = (app) => {
     app.delete('/api/product/:id', ProductController.deleteProduct)
     app.put('/api/product/:id', ProductController.editProduct)
     app.put('/api/product/update/:id', ProductController.UpdateProductQuantity)
+
 
     app.post('/api/saleProduct', SaleProductController.addSaleProduct)
     app.get('/api/saleProduct/:id', SaleProductController.getSales)

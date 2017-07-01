@@ -53,6 +53,7 @@ export default class AuthMiddelware {
             sessionStorage.clear();
             localStorage.clear();
             dispatch(authActions.SignOutWithSuccessFul())
+            browserHistory.push('/signin')
         }
     }
 }

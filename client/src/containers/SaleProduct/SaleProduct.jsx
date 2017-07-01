@@ -18,6 +18,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
+        getProductsByStoreId: (id) => dispatch(ProductMiddleware.getProducts(id)),
         updateStoreData: (updatedProduct, productId, storeId) => dispatch(ProductMiddleware.UpdateProductQuantity(updatedProduct, productId, storeId)),
         addSaleProduct: (product) => dispatch(saleProductMiddleware.addSaleProduct(product))
     }
@@ -43,6 +44,10 @@ class SaleProduct extends Component {
         this.handleCheckQuantity = this.handleCheckQuantity.bind(this)
         this.handleUpdateStoreData = this.handleUpdateStoreData.bind(this)
 
+    }
+
+    componentWillMount(){
+      this.props.getProductsByStoreId(this.props.params.id)
     }
 
     handleDateChange(e, date) {
@@ -131,7 +136,7 @@ class SaleProduct extends Component {
         this.props.productList.filter((product => {
             if (product.productName === this.state.productName) {
                 let quantity = this.refs.quantity.getValue()
-                if (product.quantity > quantity) {
+                if (product.quantity >= quantity) {
                     let unitPrice = this.state.unitPrice;
                     let totalPrice = quantity * unitPrice;
                     this.setState({
