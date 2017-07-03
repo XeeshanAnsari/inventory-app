@@ -1,0 +1,1 @@
+ "C:\Program Files\MongoDB\Server\3.2\bin\mongo.exe"  ds127872.mlab.com:27872/inventory_app -u zeeshan -p zeeshan

@@ -5,7 +5,7 @@ const INITIAL_STATE = {
     isAuthenticated: false,
     isAdmin: false,
     storeId: "",
-    userInfo: [],
+    store: [],
     error: "",
     isError: false
 };
@@ -18,16 +18,16 @@ export default function AuthReducer(state = INITIAL_STATE, action) {
         case authActions.SIGN_UP:
             return Object.assign({}, state, { isRegistered: false })
         case authActions.SIGN_UP_WITH_SUCCESSFUL:
-            return Object.assign({}, state, { userInfo: action.user, isRegistered: true })
+            return Object.assign({}, state, { store: action.user, isRegistered: true })
         case authActions.SIGN_UP_WITH_REJECTED:
             return Object.assign({}, state, { error: action.error, isRegistered: false, isError: true })
 
         case authActions.SIGN_IN:
             return Object.assign({}, state, { isRegistered: false })
-        case authActions.SIGN_IN_WITH_SUCCESSFUL:
-            return Object.assign({}, state, { userInfo: action.user, storeId: action.storeId, isAuthenticated: true, isError: false })
+        case authActions.SIGN_IN_AS_USER:
+            return Object.assign({}, state, { store: action.user, storeId: action.storeId, isAuthenticated: true, isError: false })
         case authActions.SIGN_IN_AS_ADMIN:
-            return Object.assign({}, state, { isAdmin:true , isAuthenticated: true, isError: false })
+            return Object.assign({}, state, { isAdmin: action.isAdmin, isAuthenticated: true, isError: false })
         case authActions.SIGN_IN_WITH_REJECTED:
             return Object.assign({}, state, { error: action.error, isRegistered: false, isError: true })
 

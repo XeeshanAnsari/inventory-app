@@ -13,7 +13,7 @@ import './Home.css'
 function mapStateToProps(state) {
     return {
         isAuthenticated: state.AuthReducer.isAuthenticated,
-        userInfo: state.AuthReducer.userInfo.user,
+        store: state.AuthReducer.store.user,
         storeId: state.AuthReducer.storeId,
         isAdmin: state.AuthReducer.isAdmin
     }
@@ -60,6 +60,11 @@ class Home extends Component {
                                     className="navigation-menuItem"
                                     primaryText="Availiable Stores"
                                     containerElement={<Link to="/allStores" />}
+                                />
+                                <MenuItem
+                                    className="navigation-menuItem"
+                                    primaryText="Register New User"
+                                    containerElement={<Link to="/createUser" />}
                                 />
                             </div>
                             :

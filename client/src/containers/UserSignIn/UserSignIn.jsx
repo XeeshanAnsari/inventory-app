@@ -3,21 +3,22 @@ import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper'
 import RaisedButton from 'material-ui/RaisedButton'
 import { connect } from 'react-redux'
-import  AuthMiddelware from './../../store/middleware/auth_middleware'
-import './SignIn.css'
+import { browserHistory} from 'react-router'
+import AuthMiddelware from './../../store/middleware/auth_middleware'
+import './UserSignIn.css'
 
 function mapDispatchToProps(dispatch) {
     return {
-        signin: (user) => dispatch(AuthMiddelware.SignIn(user)),
+        signin: (user) => dispatch(AuthMiddelware.UserSignIn(user)),
 
     }
 }
 
-class SignIn extends Component {
+class UserSignIn extends Component {
     constructor() {
         super()
         this.state = {
-            id: '',
+            storeId: '',
             password: '',
         }
         this.handleSignIn = this.handleSignIn.bind(this)
@@ -41,14 +42,14 @@ class SignIn extends Component {
 
                 <div className="signin-container">
                     <Paper className="signin-paper" >
-                        <h1>Log In</h1>
+                        <h1>Store Log In</h1>
                         <form onSubmit={this.handleSignIn}>
                             <TextField
-                                value={this.state.id}
+                                value={this.state.storeId}
                                 floatingLabelText="ID"
                                 hintText="ID"
                                 fullWidth={true}
-                                onChange={e => this.setState({ id: e.target.value })}
+                                onChange={e => this.setState({ storeId: e.target.value })}
                             />
                             <TextField
                                 value={this.state.password}
@@ -65,6 +66,14 @@ class SignIn extends Component {
                                 className="signin-btn"
                                 primary={true} />
 
+                            <RaisedButton
+                                label="Sign In As Admin"
+                                className="admin-btn"
+                                primary={true}
+                                onTouchTap ={() => browserHistory.push('/adminSignin')}
+
+                            />
+
 
                         </form>
                     </Paper >
@@ -78,4 +87,4 @@ class SignIn extends Component {
 
 
 
-export default connect(null, mapDispatchToProps)(SignIn);
+export default connect(null, mapDispatchToProps)(UserSignIn);

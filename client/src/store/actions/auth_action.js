@@ -7,14 +7,15 @@ export default class authActions {
     static SIGN_UP_WITH_REJECTED = "SIGN_UP_WITH_REJECTED";
 
     static SIGN_IN = "SIGN_IN";
-    static SIGN_IN_WITH_SUCCESSFUL = "SIGN_IN_WITH_SUCCESSFULL";
+    static SIGN_IN_AS_USER = "SIGN_IN_AS_USER";
+    static SIGN_IN_AS_ADMIN = "SIGN_IN_AS_ADMIN";
     static SIGN_IN_WITH_REJECTED = "SIGN_IN_WITH_REJECTED";
 
     static SIGN_OUT = "SIGN_OUT";
     static SIGN_OUT_WITH_SUCCESSFUL = "SIGN_OUT_WITH_SUCCESSFULL";
     static SIGN_OUT_WITH_REJECTED = "SIGN_OUT_WITH_REJECTED";
 
-    static SIGN_IN_AS_ADMIN = "SIGN_IN_AS_ADMIN";
+    
 
     static SignUp() {
         return {
@@ -39,17 +40,18 @@ export default class authActions {
             type: authActions.SIGN_IN
         }
     }
-    static SignInWithSuccessFul(user, storeId) {
+    static SignInAsUser(user, storeId) {
         return {
-            type: authActions.SIGN_IN_WITH_SUCCESSFUL,
+            type: authActions.SIGN_IN_AS_USER,
             user:user,
             storeId:storeId
 
         }
     }
-    static SignInAsAdmin(){
+    static SignInAsAdmin(isAdmin){
         return{
             type:authActions.SIGN_IN_AS_ADMIN,
+            isAdmin:isAdmin
         }
     }
 

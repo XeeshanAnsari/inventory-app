@@ -3,6 +3,7 @@ import storeActions from '../actions/store_action'
 const INITIAL_STATE = {
 
     stores: [],
+    singleStore: [],
     error: "",
     isError: false
 };
@@ -13,7 +14,7 @@ export default function StoreReducer(state = INITIAL_STATE, action) {
 
 
         case storeActions.CREATE_STORE:
-            return Object.assign({}, state, { stores: action.store, isError: false })
+            return Object.assign({}, state, { singleStore: action.store, isError: false })
         case storeActions.CREATE_STORE_REJECTED:
             return Object.assign({}, state, { error: action.error, isError: true })
 

@@ -4,16 +4,16 @@ import Paper from 'material-ui/Paper'
 import RaisedButton from 'material-ui/RaisedButton'
 import { connect } from 'react-redux'
 import  AuthMiddelware from './../../store/middleware/auth_middleware'
-import './Signup.css'
+import './UserSignUp.css'
 
 
 function mapDispatchToProps(dispatch) {
     return {
-        signup: (data) => dispatch(AuthMiddelware.SignUp(data))
+        signup: (data) => dispatch(AuthMiddelware.userSignUp(data))
     }
 }
 
-class SignUp extends Component {
+class UserSignUp extends Component {
 
     constructor(props) {
         super(props)
@@ -89,4 +89,4 @@ class SignUp extends Component {
 }
 
 
-export default connect(null, mapDispatchToProps)(SignUp);
+export default connect(null, mapDispatchToProps)(UserSignUp);

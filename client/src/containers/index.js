@@ -1,6 +1,7 @@
 import Home from './Home/Home'
-import SignIn from './SignIn/SignIn'
-import SignUp from './Signup/Signup'
+import UserSignIn from './UserSignIn/UserSignIn'
+import AdminSignIn from './AdminSignIn/AdminSignIn'
+import UserSignUp from './UserSignUp/UserSignUp'
 import AddStore from './AddStore/AddStore'
 import AllStores from './AllStores/AllStores'
 import AddProduct from './AddProduct/AddProduct'
@@ -11,8 +12,9 @@ import AllSales from './AllSales/AllSales'
 
 export{
     Home,
-    SignUp,
-    SignIn,
+    UserSignUp,
+    UserSignIn,
+    AdminSignIn,
     AddStore,
     AllStores,
     AddProduct,

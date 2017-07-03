@@ -1,14 +1,14 @@
 
 const User = require('../models/user_model')
 const Store = require('../models/store_model');
-const jwt = require('jwt-simple');
+
 const config = require('../config')
 
 //jwt function for userToken
-function tokenForUser(user) {
-    const timeStamp = new Date().getTime();
-    return jwt.encode({ sub: user.id, iat: timeStamp }, config.secrets)
-}
+// function tokenForUser(user) {
+//     const timeStamp = new Date().getTime();
+//     return jwt.encode({ sub: user.id, iat: timeStamp }, config.secrets)
+// }
 
 
 exports.signUp = (req, res, next) => {
@@ -22,11 +22,11 @@ exports.signUp = (req, res, next) => {
     }
 
     //see if a user with the given email exist   
-    User.findOne({ email: email }, function (err, existingUser) {
+    User.findOne({ storeId: storeId }, function (err, existingUser) {
         if (err) { return next(err) }
         // if doesnot exist
         if (existingUser) {
-            return res.status(422).send({ error: "Email is in use" })
+            return res.status(422).send({ error: "Store ID is in use" })
         }
         //if email does not exist , create new user
         const user = new User({
@@ -35,22 +35,32 @@ exports.signUp = (req, res, next) => {
             email: email,
             password: password
         })
-        Store.findById({ _id: storeId })
-            .then((store) => {
-                if (store) {
-                    user.save(function (err) {
-                        if (err) { return next(err) }
-                        //repond to request indicating the user was created
-                        res.json({
-                            user: user,
-                            token: tokenForUser(user)
-                        })
-
-                    })
-                }
-
+        console.log(user)
+        user.save(function (err) {
+            if (err) { return next(err) }
+            //repond to request indicating the user was created
+            res.json({
+                user: user,
+                token: config.tokenForUser(user)
             })
-            .catch(next)
+
+        })
+        //     Store.findById({ _id: storeId })
+        //         .then((store) => {
+        //             if (store) {
+        //                 user.save(function (err) {
+        //                     if (err) { return next(err) }
+        //                     //repond to request indicating the user was created
+        //                     res.json({
+        //                         user: user,
+        //                         token: tokenForUser(user)
+        //                     })
+
+        //                 })
+        //             }
+
+        //         })
+        //         .catch(next)
 
     })
 
@@ -58,14 +68,20 @@ exports.signUp = (req, res, next) => {
 
 }
 //fro signIn 
+
+
 exports.signIn = (req, res, next) => {
 
-    const id = req.body.id;
-    User.findOne({ storeId: id })
+    // res.send({ token: config.tokenForUser(req.body) });
+
+    
+    const storeId = req.body.storeId;
+    console.log(storeId)
+    User.findOne({ storeId: storeId })
         .then((user) => {
             res.send({
-                user: user,
-                token: tokenForUser(user)
+                user:user,
+                token: config.tokenForUser(user)
             })
         })
         .catch(err => res.status(422).send(err))

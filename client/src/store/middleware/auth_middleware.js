@@ -6,15 +6,14 @@ const rooturl = "http://localhost:3090";
 
 export default class AuthMiddelware {
 
-    static SignUp(user) {
+    static userSignUp(user) {
         return (dispatch) => {
 
-            axios.post(`${rooturl}/api/signup`, user)
+            axios.post(`${rooturl}/api/createUser`, user)
                 .then((response) => {
                     if (response.status === 200) {
                         sessionStorage.setItem('token', response.data.token);
-                        dispatch(authActions.SignUpWithSuccessFul(response.data))
-                        browserHistory.push('/signin')
+                        dispatch(authActions.SignInAsUser(response.data))
                     }
                 })
                 .catch((error) => {
@@ -23,24 +22,37 @@ export default class AuthMiddelware {
         }
     }
 
-
-    static SignIn(user) {
+    static AdminSignIn(admin) {
         return (dispatch) => {
-
-            axios.post(`${rooturl}/api/signin`, user)
+            console.log(admin)
+            axios.post(`${rooturl}/api/signinAdmin`, admin)
                 .then((response) => {
-                    let storeId = response.data.user.storeId;
-                    console.log(response.data.user.storeId)
-                    if (storeId === "admin123") {
-                          dispatch(authActions.SignInAsAdmin())
-                          browserHistory.push('/')
-                    } else {
-                        sessionStorage.setItem('token', response.data.token);
-                        dispatch(authActions.SignInWithSuccessFul(response.data, storeId))
+                    if (response.status === 200) {
+                        sessionStorage.setItem('token', response.data.token)
+                        let isAdmin = true;
+                        dispatch(authActions.SignInAsAdmin(isAdmin))
                         browserHistory.push('/')
                     }
+                })
+                .catch((error) => {
+                    dispatch(authActions.SignInWithRejected(error))
+                })
+        }
+    }
 
-
+    static UserSignIn(user) {
+        return (dispatch) => {
+            console.log(user)
+            axios.post(`${rooturl}/api/userSignIn`, user)
+                .then((response) => {
+                    if (response.status === 200) {
+                        let storeId = response.data.user.storeId;
+                        console.log(response.data.user.storeId)
+                         let isUser = true;
+                        sessionStorage.setItem('token', response.data.token);
+                        dispatch(authActions.SignInAsUser(response.data, storeId))
+                        browserHistory.push('/')
+                    }
                 })
                 .catch((error) => {
                     dispatch(authActions.SignInWithRejected(error))
