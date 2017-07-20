@@ -2,8 +2,9 @@
 
 .navigation-div{
     width: 100%;
-    background: dodgerblue;
-    padding: 5%;
+    background: #00bcd4;
+    color: #ffffff;
+    padding: 10%;
 }
 .user-name{
     position: relative;

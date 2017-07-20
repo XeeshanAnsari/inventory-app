@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { browserHistory } from 'react-router';
 import saleProductActions from '../actions/sale_product_action'
-const rooturl = "http://localhost:3090";
+import {rooturl} from '../../store/configUrl';
 
 
 

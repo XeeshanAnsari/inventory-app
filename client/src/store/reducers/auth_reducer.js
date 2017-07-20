@@ -25,9 +25,9 @@ export default function AuthReducer(state = INITIAL_STATE, action) {
         case authActions.SIGN_IN:
             return Object.assign({}, state, { isRegistered: false })
         case authActions.SIGN_IN_AS_USER:
-            return Object.assign({}, state, { store: action.user, storeId: action.storeId, isAuthenticated: true, isError: false })
+            return Object.assign({}, state, { store: action.user, storeId: action.storeId, isAuthenticated: true, isError: false  ,isAdmin:false})
         case authActions.SIGN_IN_AS_ADMIN:
-            return Object.assign({}, state, { isAdmin: action.isAdmin, isAuthenticated: true, isError: false })
+            return Object.assign({}, state, { isAdmin: action.isAdmin, isAuthenticated: true, isError: false , isAdmin:true})
         case authActions.SIGN_IN_WITH_REJECTED:
             return Object.assign({}, state, { error: action.error, isRegistered: false, isError: true })
 

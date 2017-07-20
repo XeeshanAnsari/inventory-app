@@ -44,7 +44,8 @@ class Home extends Component {
         return (
             <div>
                 <div className='navigation-div'>
-                    <Avatar src="img.jpg" />
+                    {/* <Avatar src="img.jpg" /> */}
+                    <b>WelCome</b>
                 </div>
                 {(this.props.isAuthenticated) ?
                     <div>

@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
 import authActions from '../actions/auth_action'
-const rooturl = "http://localhost:3090";
+import {rooturl} from '../../store/configUrl';
+
 
 
 export default class AuthMiddelware {

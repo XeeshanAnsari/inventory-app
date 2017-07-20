@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
 import storeActions from '../actions/store_action'
-const rooturl = "http://localhost:3090";
+import {rooturl} from '../../store/configUrl';
 
 export default class StoreMiddleware {
     static createStore(store) {
