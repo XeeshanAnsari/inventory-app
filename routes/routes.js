@@ -1,6 +1,6 @@
 const AdminController = require('../controllers/admin_controller')
 const UserController = require('../controllers/user_controller');
-const StoreController = require('../controllers/Store_controller');
+const StoreController = require('../controllers/store_controller');
 const ProductController = require('../controllers/product_controller');
 const SaleProductController = require('../controllers/sale_product_controller');
 
