@@ -14,7 +14,6 @@ export default class AuthMiddelware {
                 .then((response) => {
                     if (response.status === 200) {
                         sessionStorage.setItem('token', response.data.token);
-                        dispatch(authActions.SignInAsUser(response.data))
                     }
                 })
                 .catch((error) => {

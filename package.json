@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-   "engines": {
-    "node": "7.9.0"
+  "engines": {
+    "node": "8.2.1"
   },
   "scripts": {
     "test": "NODE_ENV=test nodemon --exec mocha --recursive -R min",
@@ -17,9 +17,13 @@
     "body-parser": "^1.17.2",
     "cors": "^2.8.3",
     "express": "^4.15.3",
+    "jwt-simple": "^0.5.1",
     "mocha": "^3.4.1",
     "mongoose": "^4.10.0",
     "nodemon": "^1.11.0",
+    "passport": "^0.3.2",
+    "passport-jwt": "^2.2.1",
+    "passport-local": "^1.0.0",
     "supertest": "^3.0.0"
   }
 }
