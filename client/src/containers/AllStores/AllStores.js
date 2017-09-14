@@ -29,7 +29,10 @@ class AllStores extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            openDialog: false
+            openDialog: false,
+            storeId: '',
+            storeName: '',
+            location: ''
         }
         this.handleDeleteStore = this.handleDeleteStore.bind(this)
         this.handleEditStore = this.handleEditStore.bind(this)
@@ -54,32 +57,35 @@ class AllStores extends Component {
     handleDeleteStore() {
         let id = this.state.storeId;
         this.props.deleteStore(id);
+        this.handleCloseDialog()
 
-    }
-    EditStore(store) {
-        this.setState({
-            openDialog: true,
-            storeId: store._id
-        })
     }
     handleCloseDialog() {
         this.setState({ openDialog: false })
+    }
+    handleOpenDialog(store) {
+        this.setState({
+            storeId: store._id,
+            storeName: store.storeName,
+            location: store.location,
+            openDialog: true
+        })
     }
 
     handleEditStore(e) {
         e.preventDefault();
         let store = {
-            storeName: this.refs.storeName.getValue(),
-            location: this.refs.location.getValue()
+            storeName: this.state.storeName,
+            location: this.state.location
         }
         let id = this.state.storeId;
         this.props.editStore(id, store)
-        //     .then(() => this.setState({ openDialog: false }))
+        this.handleCloseDialog()
     }
     render() {
         return (
             <div className='container'>
-                <AppBar title="AVAILIABLE STORES" showMenuIconButton={false}/>
+                <AppBar title="AVAILIABLE STORES" showMenuIconButton={false} />
                 <Table className="Table">
                     <TableHeader displayRowCheckbox={false} >
                         <TableRow  >
@@ -96,9 +102,9 @@ class AllStores extends Component {
                             this.props.storeList.map((store, i) => {
                                 return (
                                     <TableRow key={store._id} >
-                                        <TableRowColumn >{i + 1}</TableRowColumn>
-                                        <TableRowColumn >{store.storeName}</TableRowColumn>
-                                        <TableRowColumn >{store.location}</TableRowColumn>
+                                        <TableRowColumn   onTouchTap={() => this.handleOpenDialog(store)}>{i + 1}</TableRowColumn>
+                                        <TableRowColumn onTouchTap={() => this.handleOpenDialog(store)}>{store.storeName}</TableRowColumn >
+                                        <TableRowColumn onTouchTap={() => this.handleOpenDialog(store)}>{store.location}</TableRowColumn>
                                         <TableRowColumn >
                                             <RaisedButton
                                                 onTouchTap={() => this.handleOpenStore(store)}
@@ -124,18 +130,20 @@ class AllStores extends Component {
                 >
                     <form  >
                         <TextField
-                            ref="storeName"
+                            defaultValue={this.state.storeName}
                             floatingLabelText="Store Name"
                             hintText="Store Name"
+                            onChange={(ev) => this.setState({ storeName: ev.target.value })}
                             fullWidth={true}
                             required
                         />
 
                         <TextField
-                            ref="location"
+                            defaultValue={this.state.location}
                             type='Location'
                             floatingLabelText="Location"
                             hintText="Location"
+                            onChange={(ev) => this.setState({ location: ev.target.value })}
                             fullWidth={true}
                             required
                         />

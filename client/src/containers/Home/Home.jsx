@@ -64,7 +64,7 @@ class Home extends Component {
                                 />
                                 <MenuItem
                                     className="navigation-menuItem"
-                                    primaryText="Register New User"
+                                    primaryText="Register New Store"
                                     containerElement={<Link to="/createUser" />}
                                 />
                             </div>

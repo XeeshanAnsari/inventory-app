@@ -10,7 +10,7 @@ mongoose.Promise = global.Promise
 
 
 // mongoose.connect('mongodb://localhost/inventory_app');
-mongoose.connect('mongodb://zeeshan:zeeshan@ds127872.mlab.com:27872/inventory_app');
+mongoose.connect('mongodb://zeeshan:zeeshan@ds127872.mlab.com:27872/inventory_app', { useMongoClient: true });
 
 app.use(bodyParser.json())
 

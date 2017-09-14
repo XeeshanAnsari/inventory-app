@@ -35,7 +35,15 @@ class AllProducts extends Component {
         super(props);
         this.state = {
             openDialog: false,
-            controlledDate: null
+            controlledDate: null,
+            storeId: this.props.params.id,
+            productId: '',
+            productName: '',
+            manufacturer: '',
+            description: '',
+            quantity: '',
+            date: '',
+            price: '',
         }
         this.handleDeleteproduct = this.handleDeleteproduct.bind(this)
         this.handleEditproduct = this.handleEditproduct.bind(this)
@@ -74,15 +82,22 @@ class AllProducts extends Component {
     }
 
     handleDeleteproduct() {
-        let id = this.state.productId;
+        let productId = this.state.productId;
         let storeId = this.props.params.id;
-        this.props.deleteProduct(id, storeId);
+        this.props.deleteProduct(productId, storeId);
+        this.handleCloseDialog();
 
     }
     Editproduct(product) {
         this.setState({
             openDialog: true,
-            productId: product._id
+            productId: product._id,
+            productName: product.productName,
+            manufacturer: product.manufacturer,
+            description: product.description,
+            quantity: product.quantity,
+            date: product.date,
+            price: product.price,
         })
     }
 
@@ -91,18 +106,18 @@ class AllProducts extends Component {
 
         e.preventDefault();
         let product = {
-            productName: this.refs.productName.getValue(),
-            manufacturer: this.refs.manufacturer.getValue(),
-            description: this.refs.description.getValue(),
-            quantity: this.refs.quantity.getValue(),
-            date: this.state.controlledDate,
-            price: this.refs.price.getValue(),
+            productName: this.state.productName,
+            manufacturer: this.state.manufacturer,
+            description: this.state.description,
+            quantity: this.state.quantity,
+            date: this.state.date,
+            price: this.state.price,
         }
 
-        let id = this.state.productId;
+        let productId = this.state.productId;
         let storeId = this.props.params.id
-        this.props.editProduct(id, product, storeId)
-        //     .then(() => this.setState({ openDialog: false }))
+        this.props.editProduct(productId, product, storeId)
+        this.handleCloseDialog();
     }
 
     handleCloseDialog() {
@@ -110,7 +125,7 @@ class AllProducts extends Component {
     }
     handleDateChange = (event, date) => {
         this.setState({
-            controlledDate: date,
+            date: date,
         })
     }
     render() {
@@ -202,39 +217,45 @@ class AllProducts extends Component {
                     onRequestClose={this.handleCloseDialog}
                     autoScrollBodyContent={true}
                 >
+
                     <form  >
                         <TextField
-                            ref="productName"
+                            defaultValue={this.state.productName}
                             floatingLabelText="Product Name"
                             hintText="Product Name"
+                            onChange={(ev) => this.setState({ storeName: ev.target.value })}
                             fullWidth={true}
                             required
                         />
 
                         <TextField
-                            ref="manufacturer"
+                            defaultValue={this.state.manufacturer}
                             floatingLabelText="Manufacturer"
                             hintText="Manufacturer"
+                            onChange={(ev) => this.setState({ manufacturer: ev.target.value })}
                             fullWidth={true}
                             required
                         />
 
                         <TextField
-                            ref="description"
+                            defaultValue={this.state.description}
                             floatingLabelText="Description"
                             hintText="Description"
+                            onChange={(ev) => this.setState({ description: ev.target.value })}
                             fullWidth={true}
                             required
-                        /><TextField
-                            ref="quantity"
+                        />
+                        <TextField
+                            defaultValue={this.state.quantity}
                             floatingLabelText="Quantity"
                             hintText="Quantity"
+                            onChange={(ev) => this.setState({ quantity: ev.target.value })}
                             type="number"
                             fullWidth={true}
                             required
                         />
                         <DatePicker
-                            value={this.state.controlledDate}
+                            value={this.state.date}
                             onChange={this.handleDateChange.bind(this)}
                             floatingLabelText="Date"
                             hintText="Date"
@@ -249,10 +270,11 @@ class AllProducts extends Component {
                             required
                         />*/}
                         <TextField
-                            ref="price"
+                            value={this.state.price}
                             type="number"
                             floatingLabelText="Price"
                             hintText="Price"
+                            onChange={(ev) => this.setState({ price: ev.target.value })}
                             fullWidth={true}
                             required
                         />
