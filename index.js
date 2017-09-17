@@ -1,6 +1,11 @@
+const http = require('http');
 const app = require('./app');
 
+// Server setup
+const port = process.env.PORT || 3090;
+const server = http.createServer(app);
 
-app.listen(3090 , ()=>{
-    console.log('Running Port 3090')
+
+app.listen(port, () => {
+    console.log('Running Port', port)
 })
